@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: maven-settings
+data:
+  settings.xml: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!--\n     Copyright
+    2005-2016 Red Hat, Inc.\n     Red Hat licenses this file to you under the Apache
+    License, version\n     2.0 (the \"License\"); you may not use this file except
+    in compliance\n     with the License.  You may obtain a copy of the License at\n
+    \       http://www.apache.org/licenses/LICENSE-2.0\n     Unless required by applicable
+    law or agreed to in writing, software\n     distributed under the License is distributed
+    on an \"AS IS\" BASIS,\n     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+    express or\n     implied.  See the License for the specific language governing\n
+    \    permissions and limitations under the License.\n-->\n<settings xmlns=\"http://maven.apache.org/SETTINGS/1.0.0\"\n
+    \         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n          xsi:schemaLocation=\"http://maven.apache.org/SETTINGS/1.0.0
+    http://maven.apache.org/xsd/settings-1.0.0.xsd\">\n\n  <profiles>\n    <profile>\n
+    \     <id>fuse.repos</id>\n\n      <repositories>\n        \n        <repository>\n
+    \         <id>maven.central</id>\n          <name>Maven Central</name>\n          <url>https://repo1.maven.org/maven2</url>\n
+    \         <snapshots>\n            <enabled>false</enabled>\n          </snapshots>\n
+    \         <releases>\n            <enabled>true</enabled>\n            <updatePolicy>never</updatePolicy>\n
+    \         </releases>\n        </repository>\n \n        \n        <repository>\n
+    \         <id>redhat.ga</id>\n          <name>Red Hat General Availability Repository</name>\n
+    \         <url>https://maven.repository.redhat.com/ga</url>\n          <snapshots>\n
+    \           <enabled>false</enabled>\n          </snapshots>\n          <releases>\n
+    \           <enabled>true</enabled>\n            <updatePolicy>never</updatePolicy>\n
+    \         </releases>\n        </repository>\n \n        \n        <repository>\n
+    \         <id>redhat.ea</id>\n          <name>Red Hat Early Access Repository</name>\n
+    \         <url>https://maven.repository.redhat.com/earlyaccess/all</url>\n          <snapshots>\n
+    \           <enabled>false</enabled>\n          </snapshots>\n          <releases>\n
+    \           <enabled>true</enabled>\n            <updatePolicy>never</updatePolicy>\n
+    \         </releases>\n        </repository>\n \n      </repositories>\n\n      <pluginRepositories>\n
+    \       \n        <pluginRepository>\n          <id>maven.central</id>\n          <name>Maven
+    Central</name>\n          <url>https://repo1.maven.org/maven2</url>\n          <snapshots>\n
+    \           <enabled>false</enabled>\n          </snapshots>\n          <releases>\n
+    \           <enabled>true</enabled>\n            <updatePolicy>never</updatePolicy>\n
+    \         </releases>\n        </pluginRepository>\n \n        \n        <pluginRepository>\n
+    \         <id>redhat.ga</id>\n          <name>Red Hat General Availability Repository</name>\n
+    \         <url>https://maven.repository.redhat.com/ga</url>\n          <snapshots>\n
+    \           <enabled>false</enabled>\n          </snapshots>\n          <releases>\n
+    \           <enabled>true</enabled>\n            <updatePolicy>never</updatePolicy>\n
+    \         </releases>\n        </pluginRepository>\n \n        \n        <pluginRepository>\n
+    \         <id>redhat.ea</id>\n          <name>Red Hat Early Access Repository</name>\n
+    \         <url>https://maven.repository.redhat.com/earlyaccess/all</url>\n          <snapshots>\n
+    \           <enabled>false</enabled>\n          </snapshots>\n          <releases>\n
+    \           <enabled>true</enabled>\n            <updatePolicy>never</updatePolicy>\n
+    \         </releases>\n        </pluginRepository>\n \n      </pluginRepositories>\n
+    \   </profile>\n  </profiles>\n\n  <activeProfiles>\n    <activeProfile>fuse.repos</activeProfile>\n
+    \ </activeProfiles>\n\n</settings>\n"
+

@@ -1,0 +1,64 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: {{ .Values.app.name }}-pipeline
+  labels:
+    type: pipeline
+spec:
+  params:
+    - name: source-repo
+      description: source repo that contains the application code
+      type: string
+    - name: source-branch
+      description: source branch to build from
+      type: string
+    - name: output-image
+      description: reference of the image that will get created
+      type: string
+  tasks:
+    - name: git-clone
+      params:
+        - name: url
+          value: $(params.source-repo)
+        - name: revision
+          value: $(params.source-branch)
+      taskRef:
+        kind: ClusterTask
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: {{ .Values.app.name }}-source
+    - name: build-artifact
+      params:
+        - name: GOALS
+          value:
+            - '-DskipTests'
+            - package
+      runAfter:
+        - git-clone
+      taskRef:
+        kind: ClusterTask
+        name: maven
+      workspaces:
+        - name: source
+          workspace: {{ .Values.app.name }}-source
+        - name: maven-settings
+          workspace: maven-settings
+    - name: buildah
+      params:
+        - name: IMAGE
+          value: $(params.output-image)
+        - name: DOCKERFILE
+          value: src/main/docker/Dockerfile.jvm
+      runAfter:
+        - build-artifact
+      taskRef:
+        kind: ClusterTask
+        name: buildah
+      workspaces:
+        - name: source
+          workspace: {{ .Values.app.name }}-source
+  workspaces:
+    - name: {{ .Values.app.name }}-source
+    - name: maven-settings
